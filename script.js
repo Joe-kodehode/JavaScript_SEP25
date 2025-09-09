@@ -40,7 +40,7 @@ console.log(15 != "15");
 console.log(15 !== "15");
 
 // --------------------------------------
-// Section 2: Conditionals with if, if...else, if...else if...else
+// Section 3: Conditionals with if, if...else, if...else if...else
 // --------------------------------------
 
 // basic if / else if / else statement
@@ -58,7 +58,7 @@ if (temperature > 25) {
 }
 
 // --------------------------------------
-// Section 3: Logical Operators: AND (&&) and OR (||)
+// Section 4: Logical Operators: AND (&&) and OR (||)
 // --------------------------------------
 
 // Break until 13:05
@@ -89,7 +89,7 @@ if (day === "Saturday" || day === "Sunday") {
 }
 
 // --------------------------------------
-// Section 4: Ternary Operator
+// Section 5: Ternary Operator
 // --------------------------------------
 
 // The ternary operator is a useful for simple if...else statements.
@@ -112,7 +112,7 @@ console.log(fee);
 // let fee = isVip ? "$0" : isMember ? "$5" : "$10";
 
 // --------------------------------------
-// Section 5: Switch Statement
+// Section 6: Switch Statement
 // --------------------------------------
 
 // A switch statement checks a value against multiple cases.
@@ -134,7 +134,7 @@ switch (fruit) {
 }
 
 // --------------------------------------
-// Section 6: Truthy and Falsey Values
+// Section 7: Truthy and Falsey Values
 // --------------------------------------
 
 let value = null;
@@ -163,7 +163,7 @@ if (value) {
 // null
 
 // --------------------------------------
-// Section 7: Template literal // Template strings
+// Section 8: Template literal // Template strings
 // --------------------------------------
 
 // Example 1
