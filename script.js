@@ -1,196 +1,167 @@
-// Lesson 2: Conditionals and Related Operators in JavaScript
+// Lesson 3: Recap of JavaScript Basics with New Examples
 
-// --------------------------------------
-// Section 1: The typeof Operator
-// --------------------------------------
+// ------------------------------
+// Section 1: Variables, Data Types, and Operators
+// ------------------------------
 
-let myVariable = "hello world";
+// Scenario: An online store managing product details.
 
-console.log(typeof myVariable);
+const storeName = "Tech Haven"; // String
+const productName = "Wireless Earbuds"; // String
+let productPrice = 75; // Integer (number)
+let productQuantity = 20; // Integer
+let onSale; // Undefined
+const isInStock = true; // Boolean
+const productTags = ["audio", "wireless", "accessory"]; // Array
 
-myVariable = 100;
+console.log("Store name:", storeName);
+console.log("Product name:", productName);
+console.log("Product Price:", productPrice);
+console.log("Product Quantity:", productQuantity);
+console.log("In Stock?", isInStock);
+console.log("Product Tags:", productTags[0], productTags[1], productTags[2]);
 
-console.log(typeof myVariable);
+// see the contents of the array using spread syntax (will learn this more later!)
+console.log("Product Tags:", ...productTags);
 
-// --------------------------------------
-// Section 2: Comparison Operators
-// --------------------------------------
+// Calculate the total cost for the available quantity.
 
-// These operators compare values and return a boolean (true or false).
+const totalValue = productPrice * productQuantity;
 
-console.log(15 > 20); // Greater than (>) operator
+console.log("Total value of in stock wireless earbuds is", totalValue);
 
-console.log(15 < 20); // Less than (<) operator
+// Increase the product price by 10.
 
-console.log(15 >= 20); // Greater than or equal to (>=) operator
-console.log(15 >= 15);
+// productPrice = productPrice + 10;
+productPrice += 10;
+console.log(productPrice);
 
-console.log(15 <= 20); // Less than or equal to (<=) operator
-console.log(15 <= 15);
+// increase productQuantity by 1
 
-// The equality (==) operator checks if values are equal (with type conversion):
-console.log(15 == "15"); // true due to type coercion
+// productQuantity += 1;
+productQuantity++;
 
-// Strict equality (===) operator checks for both value and type:
-console.log(15 === "15"); // false, because the types differ (number vs string)
+// decrease productQuantity by 1
+productQuantity--;
 
-console.log(15 != 20);
-console.log(15 != "15");
+console.log(productQuantity);
 
-console.log(15 !== "15");
+// ------------------------------
+// Section 2: Conditionals and Logical Operators
+// ------------------------------
 
-// --------------------------------------
-// Section 3: Conditionals with if, if...else, if...else if...else
-// --------------------------------------
+// Example: Decide promotion messages based on basket size.
 
-// basic if / else if / else statement
+let basketSize = 200;
 
-let temperature = 3;
-
-if (temperature > 25) {
-  console.log("It's a hot day!");
-} else if (temperature > 5) {
-  console.log("It's a typical day");
-} else if (temperature > 0) {
-  console.log("it's a cold day!");
+if (basketSize > 300) {
+  console.log("You qualify for free delivery!");
+} else if (basketSize >= 250) {
+  console.log("You're close to free delivery! spend over 300 to qualify!");
 } else {
-  console.log("It's a freezing day!");
+  console.log("If you spend over 300, you'll get free delivery");
 }
 
-// --------------------------------------
-// Section 4: Logical Operators: AND (&&) and OR (||)
-// --------------------------------------
+// Logical operators: Using AND (&&) and OR (||)
+// Scenario: Show a discount message if the product is in stock and either it's on sale or the quantity is over 10.
 
-// Break until 13:05
+onSale = false;
 
-let age = 18;
-let hasLicence = true;
-let suspended = false;
-
-if (age >= 18 && hasLicence && !suspended) {
-  console.log("You are allowed to drive");
-}
-
-console.log(hasLicence);
-
-let day = "Sunday";
-if (day === "Saturday" || day === "Sunday") {
-  console.log("It's the weekend! Yipee");
-} else if (
-  day === "Monday" ||
-  day === "Tuesday" ||
-  day === "Wednesday" ||
-  day === "Thursday" ||
-  day === "Friday"
-) {
-  console.log("It's a weekday! boo.");
+if (isInStock && (onSale || productQuantity > 10)) {
+  console.log("you get 15% off this product");
 } else {
-  console.log("you've typed in something stupid, havent you?");
+  console.log("No discount for you, loser!");
 }
 
-// --------------------------------------
-// Section 5: Ternary Operator
-// --------------------------------------
+// Ternary
+// if basketSize is over 250 console log "Free shipping", otherwise console log "$15 fee".
 
-// The ternary operator is a useful for simple if...else statements.
+basketSize = 300;
+let shippingCost = basketSize > 250 ? "Free shipping" : "$15 fee";
 
-const isMember = true;
+console.log(shippingCost);
 
-// let fee = "";
+// Switch statement: Display messages based on the product category.
 
-// if (isMember) {
-//   fee = "$5";
-// } else {
-//   fee = "$10";
-// }
+let category = "audio";
 
-let fee = isMember ? "$5" : "$10";
-
-console.log(fee);
-
-// You can 'nest' ternary's, but it's usually better to use if/else
-// let fee = isVip ? "$0" : isMember ? "$5" : "$10";
-
-// --------------------------------------
-// Section 6: Switch Statement
-// --------------------------------------
-
-// A switch statement checks a value against multiple cases.
-
-const fruit = "kiwi";
-
-switch (fruit) {
-  case "apple":
-    console.log("Apples are delicious!");
+switch (category) {
+  case "audio":
+    console.log("This product is in our Audio department.");
     break;
-  case "banana":
-    console.log("Bananas are a great source of energy!");
+  case "accessories":
+    console.log("This is in our Accessories section");
     break;
-  case "orange":
-    console.log("Oranges are orange");
+  case "gadget":
+    console.log("This is in the gadgets collection");
     break;
   default:
-    console.log("Unknown fruit detected");
+    console.log("This product must be uncategorised");
 }
 
-// --------------------------------------
-// Section 7: Truthy and Falsey Values
-// --------------------------------------
+// Rule of Thumb
 
-let value = null;
+// Use if/else for complex logic and range checks.
 
-console.log(value);
+// Use switch when you’re testing one variable against many exact options — it keeps code tidy.
 
-if (value) {
-  console.log("this value was truthy");
+// ------------------------------
+// Section 3: typeof Operator and Truthy/Falsey Values
+// ------------------------------
+
+// Using the typeof operator to check data types:
+console.log(typeof storeName);
+console.log(typeof productPrice);
+console.log(typeof isInStock);
+console.log(typeof productTags);
+
+// Why It Works This Way
+
+// When JavaScript was first created, typeof was implemented in a very simple way:
+
+// Primitive types (string, number, boolean, undefined, symbol, bigint) got their own categories.
+
+// Everything else was lumped into "object".
+
+// Demonstrating Truthy and Falsey values:
+
+const dataType = "test";
+if (dataType) {
+  console.log("This came back true");
 } else {
-  console.log("this value was falsey");
+  console.log("This came back false");
 }
 
-// Truthy data types:
-// A string with value
-// A positive number
-// A negative number
-// An array with values
-// An empty array
-// An object with values
-// An empty object
+// --------------------------------------------------
+// Section 4: Template Literals // Template String Recap
+// --------------------------------------------------
 
-// Falsey data types:
-// An empty string
-// 0
-// undefined
-// null
+// "welcome" + " " + userName + " " + "to my site"
 
-// --------------------------------------
-// Section 8: Template literal // Template strings
-// --------------------------------------
+const firstName = "Harry";
+const lastName = "Miller";
+const city = "London";
+const country = "England";
 
-// Example 1
-const firstName = "Ola";
-const lastName = "Nordmann";
+const welcomeMessage = `Welcome ${firstName} ${lastName} from ${city}, ${country}! We hope you enjoy shopping with us!`;
 
-// Bad way of doing it 👎
-const greeting1 =
-  firstName + " " + lastName + " " + ", welcome to the website!";
+console.log(welcomeMessage);
 
-// Good way of doing it with a template literal 🎉
-const greeting2 = `${firstName} ${lastName}, welcome to the website`;
+// We currently have 5 wireless headphones in stock. The department tags for this product are: audio, wireless, accessory.
+const productInfo = `We currently have ${productQuantity} ${productName} in stock. The department tags for this product are: ${productTags.join(
+  ", "
+)}`;
 
-console.log(greeting1);
-console.log(greeting2);
+console.log(productInfo);
 
-// Example 2
-const user1 = {
-  name: "Joe",
-  location: "Stavanger",
-};
+// Mixing ternary and template strings.
 
-const user2 = {
-  name: "Gabriel",
-  location: "Kristiansund",
-};
+// basketSize > 250 ? "are" : "aren't";
 
-userGreeting = `Welcome ${user2.name} from ${user2.location} to the webpage`;
+basketSize = 10;
 
-console.log(userGreeting);
+const basketMessage = `You ${
+  basketSize > 250 ? "are" : "aren't"
+} eligible for free delivery`;
+
+console.log(basketMessage);

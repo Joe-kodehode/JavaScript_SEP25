@@ -103,7 +103,7 @@ console.log(fixedValue);
 // Operators perform calculations or comparisons.
 
 let a = 5;
-let b = 2;
+let b = 2; 
 
 console.log(a + b); // Addition: 15
 console.log(a - b); // Subtraction: 5
