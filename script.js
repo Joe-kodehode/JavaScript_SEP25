@@ -1,167 +1,210 @@
-// Lesson 3: Recap of JavaScript Basics with New Examples
+// Lesson 4: Functions in JavaScript
 
-// ------------------------------
-// Section 1: Variables, Data Types, and Operators
-// ------------------------------
+// A function is a block of code designed to do one specific task. It lets you write code once and reuse it, keeping your program clean and organized. However, the function won't do anything until you call it.
 
-// Scenario: An online store managing product details.
+// ---------------------------------------------------
+// Section 1: Function Declarations (aka function statements) and Hoisting
+// ---------------------------------------------------
 
-const storeName = "Tech Haven"; // String
-const productName = "Wireless Earbuds"; // String
-let productPrice = 75; // Integer (number)
-let productQuantity = 20; // Integer
-let onSale; // Undefined
-const isInStock = true; // Boolean
-const productTags = ["audio", "wireless", "accessory"]; // Array
-
-console.log("Store name:", storeName);
-console.log("Product name:", productName);
-console.log("Product Price:", productPrice);
-console.log("Product Quantity:", productQuantity);
-console.log("In Stock?", isInStock);
-console.log("Product Tags:", productTags[0], productTags[1], productTags[2]);
-
-// see the contents of the array using spread syntax (will learn this more later!)
-console.log("Product Tags:", ...productTags);
-
-// Calculate the total cost for the available quantity.
-
-const totalValue = productPrice * productQuantity;
-
-console.log("Total value of in stock wireless earbuds is", totalValue);
-
-// Increase the product price by 10.
-
-// productPrice = productPrice + 10;
-productPrice += 10;
-console.log(productPrice);
-
-// increase productQuantity by 1
-
-// productQuantity += 1;
-productQuantity++;
-
-// decrease productQuantity by 1
-productQuantity--;
-
-console.log(productQuantity);
-
-// ------------------------------
-// Section 2: Conditionals and Logical Operators
-// ------------------------------
-
-// Example: Decide promotion messages based on basket size.
-
-let basketSize = 200;
-
-if (basketSize > 300) {
-  console.log("You qualify for free delivery!");
-} else if (basketSize >= 250) {
-  console.log("You're close to free delivery! spend over 300 to qualify!");
-} else {
-  console.log("If you spend over 300, you'll get free delivery");
+// This function prints a simple greeting to the console.
+function sayHello() {
+  console.log("hello");
 }
 
-// Logical operators: Using AND (&&) and OR (||)
-// Scenario: Show a discount message if the product is in stock and either it's on sale or the quantity is over 10.
+// We call the function by using it's name followed by ()
+sayHello();
 
-onSale = false;
+// ---------------------------------------------------
+// Section 2: Arrow Functions (introduced in ES6, great for short, inline functions)
+// ---------------------------------------------------
 
-if (isInStock && (onSale || productQuantity > 10)) {
-  console.log("you get 15% off this product");
-} else {
-  console.log("No discount for you, loser!");
+const arrowFunction = () => {
+  console.log("Hello from the arrow function");
+};
+
+arrowFunction();
+
+// ---------------------------------------------------
+// Section 3: Return Statements and Scope
+// ---------------------------------------------------
+
+function logMessage() {
+  console.log("This function logs a message without returning a value");
 }
 
-// Ternary
-// if basketSize is over 250 console log "Free shipping", otherwise console log "$15 fee".
+logMessage();
 
-basketSize = 300;
-let shippingCost = basketSize > 250 ? "Free shipping" : "$15 fee";
+function returnsValue() {
+  const myMessage = "This is my message";
+  return myMessage;
 
-console.log(shippingCost);
-
-// Switch statement: Display messages based on the product category.
-
-let category = "audio";
-
-switch (category) {
-  case "audio":
-    console.log("This product is in our Audio department.");
-    break;
-  case "accessories":
-    console.log("This is in our Accessories section");
-    break;
-  case "gadget":
-    console.log("This is in the gadgets collection");
-    break;
-  default:
-    console.log("This product must be uncategorised");
+  // Any code below the first return is unreachable. As soon as we return, we exit the funcion.
+  return myMessage;
+  const myVar = 45;
+  return myVar;
 }
 
-// Rule of Thumb
+console.log(returnsValue());
 
-// Use if/else for complex logic and range checks.
+const returnedMessage = returnsValue();
 
-// Use switch when you’re testing one variable against many exact options — it keeps code tidy.
+console.log(returnedMessage);
 
-// ------------------------------
-// Section 3: typeof Operator and Truthy/Falsey Values
-// ------------------------------
+// ---------------------------------------------------
+// Section 4: Functions with Parameters
+// ---------------------------------------------------
 
-// Using the typeof operator to check data types:
-console.log(typeof storeName);
-console.log(typeof productPrice);
-console.log(typeof isInStock);
-console.log(typeof productTags);
+// Example 1 - hard coding
 
-// Why It Works This Way
-
-// When JavaScript was first created, typeof was implemented in a very simple way:
-
-// Primitive types (string, number, boolean, undefined, symbol, bigint) got their own categories.
-
-// Everything else was lumped into "object".
-
-// Demonstrating Truthy and Falsey values:
-
-const dataType = "test";
-if (dataType) {
-  console.log("This came back true");
-} else {
-  console.log("This came back false");
+function add() {
+  return 3 + 4;
 }
 
-// --------------------------------------------------
-// Section 4: Template Literals // Template String Recap
-// --------------------------------------------------
+console.log(add());
 
-// "welcome" + " " + userName + " " + "to my site"
+// Example 2 - soft coding
 
-const firstName = "Harry";
-const lastName = "Miller";
-const city = "London";
-const country = "England";
+function minus(num1, num2) {
+  const variableNum = 100;
 
-const welcomeMessage = `Welcome ${firstName} ${lastName} from ${city}, ${country}! We hope you enjoy shopping with us!`;
+  return num1 - variableNum;
+}
 
-console.log(welcomeMessage);
+console.log(minus(20, 10));
+console.log(minus(150, 43));
+console.log(minus(2345, 678));
 
-// We currently have 5 wireless headphones in stock. The department tags for this product are: audio, wireless, accessory.
-const productInfo = `We currently have ${productQuantity} ${productName} in stock. The department tags for this product are: ${productTags.join(
-  ", "
-)}`;
+// Function to order t-shirts
 
-console.log(productInfo);
+let blueShirtOrders = 0;
+let redShirtOrders = 0;
 
-// Mixing ternary and template strings.
+function orderShirt(color) {
+  if (color === "blue") {
+    blueShirtOrders++;
+  } else if (color === "red") {
+    redShirtOrders++;
+  }
+}
 
-// basketSize > 250 ? "are" : "aren't";
+orderShirt("blue");
+orderShirt("red");
+orderShirt("red");
 
-basketSize = 10;
+console.log(blueShirtOrders);
+console.log(redShirtOrders);
 
-const basketMessage = `You ${
-  basketSize > 250 ? "are" : "aren't"
-} eligible for free delivery`;
+// A greeter function that uses parameters and template literals
 
-console.log(basketMessage);
+const greeter = (name, time) => {
+  return `Good ${time} ${name} to my website`;
+};
+
+console.log(greeter("Joe", "morning"));
+
+console.log(greeter("Anders", "evening"));
+
+console.log(greeter("Maksym", "afternoon"));
+
+// ---------------------------------------------------
+// Section 5: Implicit Return in Arrow Functions
+// ---------------------------------------------------
+
+// const adder = (num1, num2) => {
+//   return num1 + num2;
+// };
+
+// Arrow function with an implicit return (no curly brackets or return statemet needed, only works in arrow funcion, only works with one line of code in the {})
+
+const adder = (num1, num2) => num1 + num2;
+console.log(adder(5, 10));
+
+// ---------------------------------------------------
+// Section 6: Calculator Function Using Switch Statement
+// ---------------------------------------------------
+
+function calculator(operator, num1, num2) {
+  switch (operator) {
+    case "+":
+      return num1 + num2;
+    case "-":
+      return num1 - num2;
+    case "*":
+      return num1 * num2;
+    case "/":
+      return num1 / num2;
+    default:
+      return "Invalid operator";
+  }
+}
+
+console.log(calculator("+", 5, 10));
+console.log(calculator("-", 100, 20));
+console.log(calculator("*", 20, 20));
+console.log(calculator("/", 100, 2));
+console.log(calculator("yes", 100, 2));
+
+// ---------------------------------------------------
+// Section 7: Updating a Global Variable via a Function
+// ---------------------------------------------------
+
+let hp = 100;
+
+const maxHp = 200;
+// Let's say we're making a game and adjusting the player's health.
+
+const updateHp = (gainLose, amount) => {
+  if (gainLose === "gain") {
+    hp += amount;
+
+    if (hp > maxHp) {
+      hp = maxHp;
+    }
+  } else if (gainLose === "lose") {
+    hp -= amount;
+  }
+
+  if (hp <= 0) {
+    console.log("You died!");
+    hp = 100;
+  }
+};
+
+updateHp("gain", 10);
+console.log(hp);
+updateHp("gain", 50);
+console.log(hp);
+updateHp("lose", 200);
+console.log(hp);
+
+// the health needs to go up or down.  I decide how much by.
+
+// the hp variable will move up IF we say up, and down IF we say down
+
+// ---------------------------------------------------
+// Section 8: Using Template Literals and Ternary Operator in a Function
+// ---------------------------------------------------
+
+const fruits = ["Banana", "Apple", "Pear", "Kiwi"];
+
+// Make a function which checks if an array includes an item. It then console logs if it is or isn't included.
+
+const checkItem = (fruit) => {
+  //   let included;
+
+  //   if (fruits.includes(fruit)) {
+  //     included = "is";
+  //   } else {
+  //     included = "isn't";
+  //   }
+
+  return `${fruit} ${
+    fruits.includes(fruit) ? "is" : "isn't"
+  } included in the array`;
+};
+
+console.log(checkItem("Apple"));
+console.log(checkItem("Cherry"));
+
+// console.log("Apple is included in the array.")
+// console.log("Cherry is not included in the array.")
