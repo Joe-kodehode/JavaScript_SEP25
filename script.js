@@ -1,210 +1,121 @@
-// Lesson 4: Functions in JavaScript
+// Lesson 5: JavaScript Methods (Strings, Arrays, and Numbers)
 
-// A function is a block of code designed to do one specific task. It lets you write code once and reuse it, keeping your program clean and organized. However, the function won't do anything until you call it.
+// A method in JavaScript is a built-in function that you use with a specific type of data, like strings, numbers or arrays. It lets you do something with that data—like change it, check it, copy or access part of it.
 
-// ---------------------------------------------------
-// Section 1: Function Declarations (aka function statements) and Hoisting
-// ---------------------------------------------------
+// --------------------------------------
+// Section 1: String Methods
+// --------------------------------------
 
-// This function prints a simple greeting to the console.
-function sayHello() {
-  console.log("hello");
-}
+const text = "     Hello, JavaScript World World!    ";
 
-// We call the function by using it's name followed by ()
-sayHello();
+console.log(text.trim()); // removes whitespace from both ends of the string. Does not alter the original, can be stored in a new variable.
+const trimmedText = text.trim();
+console.log(trimmedText);
+console.log(text.toUpperCase()); // converts the string to uppercase
+console.log(text.toLowerCase()); // converts the string to lowercase
+console.log(text.indexOf("JavaScript")); // finds the starting index of the given string
+const slicedText = text.slice(5, 10);
+console.log(slicedText);
+console.log(text.replace("World", "Universe")); // replaces the first occurrence of "World" with "Universe"
+console.log(text.replaceAll("World", "Universe")); // replaces all occurrences of "World" with "Universe"
+console.log(text.charCodeAt(5)); // returns the Unicode value of the character at index 3
+console.log(text.trim().length); // returns the legnth of the sting
+console.log(text.trim().split(" ")); // converts a sting into an array, splitting into new elements on the given character
+console.log(text.repeat(3));
 
-// ---------------------------------------------------
-// Section 2: Arrow Functions (introduced in ES6, great for short, inline functions)
-// ---------------------------------------------------
+// --------------------------------------
+// Section 1.2: Converting a String to a Number
+// --------------------------------------
 
-const arrowFunction = () => {
-  console.log("Hello from the arrow function");
-};
+let numericString = "123.45xyz";
 
-arrowFunction();
+console.log(Number(numericString)); // converts entire string to a number; returns NaN if any part is invalid
+console.log(parseInt(numericString)); // parses as an integer until an invalid character (such as decimals or text)
+console.log(parseFloat(numericString)); // parses as a float until an invalid character (such as text)
 
-// ---------------------------------------------------
-// Section 3: Return Statements and Scope
-// ---------------------------------------------------
+// --------------------------------------
+// Section 2: Array Methods
+// --------------------------------------
 
-function logMessage() {
-  console.log("This function logs a message without returning a value");
-}
+const colors = ["Red", "Green", "Blue"];
 
-logMessage();
+console.log(colors.indexOf("Green"));
+console.log(colors.length);
 
-function returnsValue() {
-  const myMessage = "This is my message";
-  return myMessage;
+colors.push("Yellow");
+console.log(colors); // push adds to the end of an array
 
-  // Any code below the first return is unreachable. As soon as we return, we exit the funcion.
-  return myMessage;
-  const myVar = 45;
-  return myVar;
-}
+const lastColor = colors.pop();
+console.log(lastColor); // removes the last element from the array, can be stored in a new variable.
 
-console.log(returnsValue());
+const firstColor = colors.shift();
+console.log(firstColor); // shift removes an element from the beginning of the array
 
-const returnedMessage = returnsValue();
+colors.unshift("Purple");
+console.log(colors);
 
-console.log(returnedMessage);
+console.log(colors.join(" ")); // turns an array into a string, adds the text inside the brackets between each element
 
-// ---------------------------------------------------
-// Section 4: Functions with Parameters
-// ---------------------------------------------------
+console.log(colors.includes("Green")); // Loops over the array and checks each element to see if it matches the text in the brackets.
 
-// Example 1 - hard coding
+console.log(colors);
 
-function add() {
-  return 3 + 4;
-}
+// const newColors = colors.splice(1, 2, "Orange", "Pink"); // Splice returns the deleted elements from the array and alters the orgininal array.
 
-console.log(add());
+const newColors2 = colors.toSpliced(1, 2, "Orange", "Pink"); // toSpliced returns the array with the changes and does not alter the original array.
+console.log(newColors2);
+console.log(colors);
 
-// Example 2 - soft coding
+let unsortedArray = [3, 1, 4, 1, 5, 9];
 
-function minus(num1, num2) {
-  const variableNum = 100;
+unsortedArray.sort(); // sorts the original array
+console.log(unsortedArray);
 
-  return num1 - variableNum;
-}
+let sortedArray = unsortedArray.toSorted(); // returns a copy of the original, sorted. Does not affect the original array.
+console.log(sortedArray);
 
-console.log(minus(20, 10));
-console.log(minus(150, 43));
-console.log(minus(2345, 678));
+console.log(sortedArray[0]);
+console.log(sortedArray.at(0));
+console.log(sortedArray.at(-2));
 
-// Function to order t-shirts
+console.log(sortedArray.reverse()); // alters the original
+const reversedArray = sortedArray.toReversed(); // makes a copy of the original
 
-let blueShirtOrders = 0;
-let redShirtOrders = 0;
+console.log(reversedArray);
 
-function orderShirt(color) {
-  if (color === "blue") {
-    blueShirtOrders++;
-  } else if (color === "red") {
-    redShirtOrders++;
-  }
-}
+// --------------------------------------
+// Section 3: Number Methods
+// --------------------------------------
 
-orderShirt("blue");
-orderShirt("red");
-orderShirt("red");
+const myNum = 3.93457;
 
-console.log(blueShirtOrders);
-console.log(redShirtOrders);
+console.log(myNum.toFixed(2)); // returns a string representing myNum rounded to 2 decimal places
+console.log(myNum.toString()); // converts myNum to a string.
+console.log(myNum.toExponential()); // returns a string with myNum in exponential notation
 
-// A greeter function that uses parameters and template literals
+// --------------------------------------
+// Section 4: Chaining Methods Together
+// --------------------------------------
 
-const greeter = (name, time) => {
-  return `Good ${time} ${name} to my website`;
-};
+// Example 1: Chaining string methods
 
-console.log(greeter("Joe", "morning"));
+const rawString = "    JavaScript is fun!    ";
 
-console.log(greeter("Anders", "evening"));
+const processedString = rawString
+  .trim()
+  .replace("fun", "awesome")
+  .toUpperCase();
 
-console.log(greeter("Maksym", "afternoon"));
+console.log(processedString);
 
-// ---------------------------------------------------
-// Section 5: Implicit Return in Arrow Functions
-// ---------------------------------------------------
+// Example 2: Chaining array methods
 
-// const adder = (num1, num2) => {
-//   return num1 + num2;
-// };
+const words = ["hello", "world"];
 
-// Arrow function with an implicit return (no curly brackets or return statemet needed, only works in arrow funcion, only works with one line of code in the {})
+const messageFromArray = words.join(" ").toUpperCase();
+console.log(messageFromArray);
 
-const adder = (num1, num2) => num1 + num2;
-console.log(adder(5, 10));
+// Example 3
 
-// ---------------------------------------------------
-// Section 6: Calculator Function Using Switch Statement
-// ---------------------------------------------------
-
-function calculator(operator, num1, num2) {
-  switch (operator) {
-    case "+":
-      return num1 + num2;
-    case "-":
-      return num1 - num2;
-    case "*":
-      return num1 * num2;
-    case "/":
-      return num1 / num2;
-    default:
-      return "Invalid operator";
-  }
-}
-
-console.log(calculator("+", 5, 10));
-console.log(calculator("-", 100, 20));
-console.log(calculator("*", 20, 20));
-console.log(calculator("/", 100, 2));
-console.log(calculator("yes", 100, 2));
-
-// ---------------------------------------------------
-// Section 7: Updating a Global Variable via a Function
-// ---------------------------------------------------
-
-let hp = 100;
-
-const maxHp = 200;
-// Let's say we're making a game and adjusting the player's health.
-
-const updateHp = (gainLose, amount) => {
-  if (gainLose === "gain") {
-    hp += amount;
-
-    if (hp > maxHp) {
-      hp = maxHp;
-    }
-  } else if (gainLose === "lose") {
-    hp -= amount;
-  }
-
-  if (hp <= 0) {
-    console.log("You died!");
-    hp = 100;
-  }
-};
-
-updateHp("gain", 10);
-console.log(hp);
-updateHp("gain", 50);
-console.log(hp);
-updateHp("lose", 200);
-console.log(hp);
-
-// the health needs to go up or down.  I decide how much by.
-
-// the hp variable will move up IF we say up, and down IF we say down
-
-// ---------------------------------------------------
-// Section 8: Using Template Literals and Ternary Operator in a Function
-// ---------------------------------------------------
-
-const fruits = ["Banana", "Apple", "Pear", "Kiwi"];
-
-// Make a function which checks if an array includes an item. It then console logs if it is or isn't included.
-
-const checkItem = (fruit) => {
-  //   let included;
-
-  //   if (fruits.includes(fruit)) {
-  //     included = "is";
-  //   } else {
-  //     included = "isn't";
-  //   }
-
-  return `${fruit} ${
-    fruits.includes(fruit) ? "is" : "isn't"
-  } included in the array`;
-};
-
-console.log(checkItem("Apple"));
-console.log(checkItem("Cherry"));
-
-// console.log("Apple is included in the array.")
-// console.log("Cherry is not included in the array.")
+const chainedNumber = myNum.toFixed(2).toString().repeat(2);
+console.log(chainedNumber);
