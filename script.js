@@ -1,121 +1,179 @@
-// Lesson 5: JavaScript Methods (Strings, Arrays, and Numbers)
-
-// A method in JavaScript is a built-in function that you use with a specific type of data, like strings, numbers or arrays. It lets you do something with that data—like change it, check it, copy or access part of it.
+// Lesson 6 - Functions / Methods recap
 
 // --------------------------------------
-// Section 1: String Methods
+// Section 1: Check if a list includes an item (function, ternary, array)
 // --------------------------------------
 
-const text = "     Hello, JavaScript World World!    ";
+const shoppingList = ["milk", "bread", "cheese"];
+const gamesList = [
+  "mario kart",
+  "hollow knight",
+  "hello kitty island adventure",
+  "remnant 2",
+  "starcraft broodwar",
+  "WoW",
+];
 
-console.log(text.trim()); // removes whitespace from both ends of the string. Does not alter the original, can be stored in a new variable.
-const trimmedText = text.trim();
-console.log(trimmedText);
-console.log(text.toUpperCase()); // converts the string to uppercase
-console.log(text.toLowerCase()); // converts the string to lowercase
-console.log(text.indexOf("JavaScript")); // finds the starting index of the given string
-const slicedText = text.slice(5, 10);
-console.log(slicedText);
-console.log(text.replace("World", "Universe")); // replaces the first occurrence of "World" with "Universe"
-console.log(text.replaceAll("World", "Universe")); // replaces all occurrences of "World" with "Universe"
-console.log(text.charCodeAt(5)); // returns the Unicode value of the character at index 3
-console.log(text.trim().length); // returns the legnth of the sting
-console.log(text.trim().split(" ")); // converts a sting into an array, splitting into new elements on the given character
-console.log(text.repeat(3));
+const checkItem = (item, list) =>
+  `${item} is ${list.includes(item) ? "" : "not"} included in the list`;
 
-// --------------------------------------
-// Section 1.2: Converting a String to a Number
-// --------------------------------------
+console.log(checkItem("milk", shoppingList));
+console.log(checkItem("catfood", shoppingList));
+console.log(checkItem("remnant 2", gamesList));
+console.log(checkItem("Gears of War", gamesList));
 
-let numericString = "123.45xyz";
+//   let isIsNot;
 
-console.log(Number(numericString)); // converts entire string to a number; returns NaN if any part is invalid
-console.log(parseInt(numericString)); // parses as an integer until an invalid character (such as decimals or text)
-console.log(parseFloat(numericString)); // parses as a float until an invalid character (such as text)
+//   if (included) {
+//     isIsNot = "is ";
+//   } else {
+//     isIsNot = "is not ";
+//   }
 
-// --------------------------------------
-// Section 2: Array Methods
-// --------------------------------------
-
-const colors = ["Red", "Green", "Blue"];
-
-console.log(colors.indexOf("Green"));
-console.log(colors.length);
-
-colors.push("Yellow");
-console.log(colors); // push adds to the end of an array
-
-const lastColor = colors.pop();
-console.log(lastColor); // removes the last element from the array, can be stored in a new variable.
-
-const firstColor = colors.shift();
-console.log(firstColor); // shift removes an element from the beginning of the array
-
-colors.unshift("Purple");
-console.log(colors);
-
-console.log(colors.join(" ")); // turns an array into a string, adds the text inside the brackets between each element
-
-console.log(colors.includes("Green")); // Loops over the array and checks each element to see if it matches the text in the brackets.
-
-console.log(colors);
-
-// const newColors = colors.splice(1, 2, "Orange", "Pink"); // Splice returns the deleted elements from the array and alters the orgininal array.
-
-const newColors2 = colors.toSpliced(1, 2, "Orange", "Pink"); // toSpliced returns the array with the changes and does not alter the original array.
-console.log(newColors2);
-console.log(colors);
-
-let unsortedArray = [3, 1, 4, 1, 5, 9];
-
-unsortedArray.sort(); // sorts the original array
-console.log(unsortedArray);
-
-let sortedArray = unsortedArray.toSorted(); // returns a copy of the original, sorted. Does not affect the original array.
-console.log(sortedArray);
-
-console.log(sortedArray[0]);
-console.log(sortedArray.at(0));
-console.log(sortedArray.at(-2));
-
-console.log(sortedArray.reverse()); // alters the original
-const reversedArray = sortedArray.toReversed(); // makes a copy of the original
-
-console.log(reversedArray);
+//   return item + " " + isIsNot + "included in the list";
 
 // --------------------------------------
-// Section 3: Number Methods
+// Section 2: Convert a Sentence into Kebab Case (function, methods)
 // --------------------------------------
 
-const myNum = 3.93457;
+function toKebabCase(string) {
+  //   return string.trim().split(" ").join("-");
+  //   return string.trim().replaceAll(" ", "-");
+  return string
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9\s]/g, "")
+    .replace(/\s+/g, "-");
+}
 
-console.log(myNum.toFixed(2)); // returns a string representing myNum rounded to 2 decimal places
-console.log(myNum.toString()); // converts myNum to a string.
-console.log(myNum.toExponential()); // returns a string with myNum in exponential notation
+console.log(toKebabCase("   Hello From The Function    "));
 
 // --------------------------------------
-// Section 4: Chaining Methods Together
+// Section 3: Checking if a word is a palindrome (function, methods)
 // --------------------------------------
 
-// Example 1: Chaining string methods
+function isPalindrome(word) {
+  const lcWord = word.toLowerCase();
 
-const rawString = "    JavaScript is fun!    ";
+  if (lcWord === lcWord.split("").reverse().join("")) {
+    return `${word} is a palindrome`;
+  } else {
+    return `${word} is not a palindrome`;
+  }
 
-const processedString = rawString
-  .trim()
-  .replace("fun", "awesome")
-  .toUpperCase();
+  // .toLowerCase   makes our words all lowercase
+  // .split("")     split our string into an array with each caracter as an element in the array
+  // .toReversed    reverses the order of the array
+  // .join("")          joins the elements in the array back into a string.
+}
 
-console.log(processedString);
+console.log(isPalindrome("Racecar")); // Racecar is a palindrome
+console.log(isPalindrome("Banana")); // Banana is not a palindrome
 
-// Example 2: Chaining array methods
+// --------------------------------------
+// Section 4: Shorten a String and Add “...” at the End (functions, methods)
+// --------------------------------------
 
-const words = ["hello", "world"];
+function shorten(text, maxLength) {
+  if (text.length <= maxLength) {
+    return text;
+  } else {
+    return text.slice(0, maxLength) + "...";
+  }
+}
 
-const messageFromArray = words.join(" ").toUpperCase();
-console.log(messageFromArray);
+let myText = "This is a long sentence that needs shortening.";
 
-// Example 3
+console.log(shorten(myText, 20)); // "This is a long sente..."
+console.log(shorten(myText, 10));
+console.log(shorten(myText, 30));
 
-const chainedNumber = myNum.toFixed(2).toString().repeat(2);
-console.log(chainedNumber);
+// --------------------------------------
+// Section 5: Introduction to Math.random
+// --------------------------------------
+
+// Math.random() is a built-in JavaScript method that gives you a random number between 0 (inclusive) and 1 (exclusive).
+// 0.0000000000000000 - 0.9999999999999999
+
+console.log(Math.random());
+
+// 0-9
+
+// 0.0000000000 - 9.9999999999999
+
+console.log(Math.floor(Math.random() * 10));
+
+// 1-10
+
+console.log(Math.floor(Math.random() * 10) + 1);
+
+// console.log(Math.ceil(Math.random() * 10));
+
+// We can use this random number to target a random element in an array!
+
+const pokemon = [
+  "pikachu",
+  "diglett",
+  "electrode",
+  "machop",
+  "magikarp",
+  "mew",
+  "blastoise",
+  "vaporeon",
+  "psyduck",
+  "meowth",
+];
+
+// We can use math.random to create a random index.  If we multiply the math.random by pokemon.length then we will be able to add or remove from the array without causing bugs.
+
+const randomIndex = Math.floor(Math.random() * pokemon.length);
+
+console.log(pokemon[randomIndex]);
+
+// --------------------------------------
+// Section 6: Remove the Middle Element from an Array (function, methods, Math.floor)
+// --------------------------------------
+
+const myArray = ["A", "B", "C", "D", "E", "F", "G", "H"];
+
+function removeMiddle(array) {
+  const mid = Math.floor(array.length / 2);
+  return array.toSpliced(mid, 1);
+}
+
+console.log(removeMiddle(myArray));
+
+// --------------------------------------
+// Section 7: Rock, paper scissors (function, switch case, Math.random)
+// --------------------------------------
+
+function rockPaperScissors(player1, AI) {
+  switch (player1 + AI) {
+    case "rock" + "rock":
+    case "paper" + "paper":
+    case "scissors" + "scissors":
+      return "It's a draw";
+
+    case "rock" + "scissors":
+    case "scissors" + "paper":
+    case "paper" + "rock":
+      return "Player 1 wins";
+
+    case "rock" + "paper":
+    case "scissors" + "rock":
+    case "paper" + "scissors":
+      return "AI wins";
+
+    default:
+      return "Stop trying to hack the game, muppet!";
+  }
+}
+
+const possibleAnswers = ["rock", "paper", "scissors"];
+
+const aiAnswer =
+  possibleAnswers[Math.floor(Math.random() * possibleAnswers.length)];
+
+console.log("The AI answered:", aiAnswer);
+
+console.log(rockPaperScissors("scissors", aiAnswer));
