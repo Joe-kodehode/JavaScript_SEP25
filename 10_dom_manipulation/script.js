@@ -11,18 +11,17 @@
 // Section 2: Targeting existing HTML Elements in JavaScript
 // --------------------------------------
 
-// getElementById / querySelector /  querySelectorAll
-
-const button = document.getElementById("my-button"); // Target element with id="my-button"
+// getElementById can target elements with ID's in our html
+const button = document.getElementById("my-button");
 console.log(button);
-
-const box1 = document.querySelector("#box1");
 
 //querySelector can target elements directly, or target classes/id's
 const heading = document.querySelector("h1");
 // const heading = document.querySelector("#my-heading");
 // const heading = document.querySelector(".my-heading");
 console.log(heading);
+
+const box1 = document.querySelector("#box1");
 
 // if we want to target multiple elements, we can use querySelectorAll
 const listItem = document.querySelectorAll(".list-item");
@@ -190,3 +189,16 @@ for (let movie of favoriteMovies) {
 
   movieList.append(listItem);
 }
+
+// --------------------------------------
+// Summary
+// --------------------------------------
+
+// ✅ The DOM is how JavaScript connects to HTML
+// ✅ Use querySelector, getElementById, etc. to select elements
+// ✅ Use .textContent, .innerHTML, and .style to change content and appearance
+// ✅ Use createElement + appendChild/append to add elements
+// ✅ Use removeChild to delete elements
+// ✅ DOM has a parent/child/sibling structure you can navigate
+// ✅ classList helps manage CSS classes
+// ✅ You can attach event listeners like click or mouseover
